@@ -31,3 +31,7 @@ pamac build --no-confirm \
   jetbrains-toolbox \
   sublime-text-dev \
   vscodium-bin
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
