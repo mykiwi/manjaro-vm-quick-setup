@@ -1,1 +1,0 @@
-# manjaro-vm-quick-setup
