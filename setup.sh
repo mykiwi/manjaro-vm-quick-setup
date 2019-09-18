@@ -32,6 +32,6 @@ pamac build --no-confirm \
   sublime-text-dev \
   vscodium-bin
 
-sudo groupadd docker
+sudo groupadd docker || true
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
