@@ -5,7 +5,7 @@ sudo pacman -S gcc make linux$(uname -r|sed 's/\W//g'|cut -c1-2)-headers virtual
 sudo mount -o loop /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt
 sudo /mnt/VBoxLinuxAdditions.run
 
-cat <<'EOF' > /etc/pamac.conf
+sudo cat <<'EOF' > /etc/pamac.conf
 RemoveUnrequiredDeps
 RefreshPeriod = 6
 NoUpdateHideIcon
