@@ -5,7 +5,7 @@ sudo pacman -S gcc make linux$(uname -r|sed 's/\W//g'|cut -c1-2)-headers virtual
 sudo mount -o loop /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt
 sudo /mnt/VBoxLinuxAdditions.run
 
-sudo cat <<'EOF' > /etc/pamac.conf
+cat <<'EOF' > pamac.conf
 RemoveUnrequiredDeps
 RefreshPeriod = 6
 NoUpdateHideIcon
@@ -17,6 +17,7 @@ OnlyRmUninstalled
 DownloadUpdates
 MaxParallelDownloads = 4
 EOF
+sudo mv pamac.conf /etc/pamac.conf
 
 pamac install --no-confirm \
   docker \
