@@ -9,5 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: docker run --rm -v `pwd`:`pwd` -w `pwd` zalox/manjaro ./setup.sh
+    - name: initialize manjaro
+      run: |
+        cd .github/workflows
+        docker build -t manjaro .
+    - name: ./setup.sh
+      run: docker run --rm -v `pwd`:`pwd` -w `pwd` manjaro ./setup.sh
