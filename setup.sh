@@ -1,9 +1,12 @@
 #!/bin/bash
 
 sudo pacman -Syyu
-sudo pacman -S gcc make linux$(uname -r|sed 's/\W//g'|cut -c1-2)-headers virtualbox-guest-iso
-sudo mount -o loop /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt
-sudo /mnt/VBoxLinuxAdditions.run
+
+if [ "$1" === "vbox" ]; then
+    sudo pacman -S gcc make linux$(uname -r|sed 's/\W//g'|cut -c1-2)-headers virtualbox-guest-iso
+    sudo mount -o loop /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt
+    sudo /mnt/VBoxLinuxAdditions.run
+fi
 
 cat <<'EOF' > pamac.conf
 RemoveUnrequiredDeps
@@ -31,7 +34,7 @@ pamac build --no-confirm \
   brave-bin \
   jetbrains-toolbox \
   sublime-text-dev \
-  vscodium-bin
+  visual-studio-code-bin
 
 sudo groupadd docker || true
 sudo usermod -aG docker $USER
