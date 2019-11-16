@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo pacman -Syyu
+sudo pacman -Syyu
 
 if [ "$1" === "vbox" ]; then
     sudo pacman -S gcc make linux$(uname -r|sed 's/\W//g'|cut -c1-2)-headers virtualbox-guest-iso
