@@ -34,6 +34,7 @@ pamac install --no-confirm \
 pamac build --no-confirm \
   brave-bin \
   jetbrains-toolbox \
+  keybase-bin \
   sublime-text-dev \
   visual-studio-code-bin
 
