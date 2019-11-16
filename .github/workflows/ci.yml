@@ -14,4 +14,4 @@ jobs:
         cd .github/workflows
         docker build -t manjaro .
     - name: ./setup.sh
-      run: docker run --rm -v `pwd`:`pwd` -w `pwd` manjaro ./setup.sh
+      run: docker run --rm --volume=`pwd`:`pwd` --workdir=`pwd` manjaro sh -c 'ls -la; ./setup.sh'
