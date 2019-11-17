@@ -21,6 +21,10 @@ OnlyRmUninstalled
 DownloadUpdates
 MaxParallelDownloads = 4
 EOF
+
+ls -la
+cat pamac.conf
+cat /etc/pamac.conf
 sudo mv pamac.conf /etc/pamac.conf
 
 pamac install --no-confirm \
