@@ -20,11 +20,10 @@ KeepNumPackages = 3
 OnlyRmUninstalled
 DownloadUpdates
 MaxParallelDownloads = 4
-EOF
+EOF;
 
-ls -la
-cat pamac.conf
-cat /etc/pamac.conf
+cat pamac.conf;
+exit;
 sudo mv pamac.conf /etc/pamac.conf
 
 pamac install --no-confirm \
