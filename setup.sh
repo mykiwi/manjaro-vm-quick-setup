@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xe
 
 sudo pacman -Syyu
 sudo pacman -Syyu
