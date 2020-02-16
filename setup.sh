@@ -10,7 +10,7 @@ if [ "$1" === "vbox" ]; then
     sudo /mnt/VBoxLinuxAdditions.run
 fi
 
-cat <<'EOF' > pamac.conf
+cat <<'EOF' > /tmp/pamac.conf
 RemoveUnrequiredDeps
 RefreshPeriod = 6
 NoUpdateHideIcon
@@ -22,7 +22,7 @@ OnlyRmUninstalled
 DownloadUpdates
 MaxParallelDownloads = 4
 EOF
-sudo mv pamac.conf /etc/pamac.conf
+sudo mv /tmp/pamac.conf /etc/pamac.conf
 
 pamac install --no-confirm \
   docker \
