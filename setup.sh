@@ -76,24 +76,35 @@ pamac build --no-confirm \
   php-amqp \
   php-blackfire
 
-sudo curl -sSL -o /usr/local/bin/composer https://getcomposer.org/composer-stable.phar
-sudo chmod +x /usr/local/bin/composer
-wget https://get.symfony.com/cli/installer -O - | bash
-sudo ln -s /home/mykiwi/.symfony/bin/symfony /usr/local/bin/symfony
-
+if [ ! -f "/usr/local/bin/composer" ]; then
+    sudo curl -sSL -o /usr/local/bin/composer https://getcomposer.org/composer-stable.phar
+    sudo chmod +x /usr/local/bin/composer
+fi
+if [ ! -f "/usr/local/bin/symfony" ]; then
+    wget https://get.symfony.com/cli/installer -O - | bash
+    sudo ln -s /home/mykiwi/.symfony/bin/symfony /usr/local/bin/symfony
+fi
 
 # Private stuff
 if [ -n "${SECRETS}" ]; then
-    keybase login --devicename $(date "+%Y-%m")-vm
-    keybase fs cp -r /keybase/private/mykiwi/setup/linux/vm-ssh-key ~/.ssh
-    chmod 700 ~/.ssh
-    chmod 600 ~/.ssh/id*
-    chmod 655 ~/.ssh/id*.pub
+    keybase login --devicename=$(date "+%Y-%m")-vm-$(uuidgen) mykiwi
 
-    mkdir -p ~/dev/github.com/mykiwi
-    git clone --recursive git@github.com:mykiwi/dotfiles.git ~/dev/github.com/mykiwi/dotfiles
-    sh -c 'cd ~/dev/github.com/mykiwi/dotfiles && install.sh'
-    git clone --recursive git@github.com:mykiwi/dotfiles.private.git ~/dev/github.com/mykiwi/dotfiles.private
-    sh -c 'cd ~/dev/github.com/mykiwi/dotfiles.private/ && install.sh'
-    chsh -s /usr/bin/zsh
+    if [ ! -d "${HOME}/.ssh" ]; then
+        keybase fs cp -r /keybase/private/mykiwi/setup/linux/vm-ssh-key ~/.ssh
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/id*
+        chmod 655 ~/.ssh/id*.pub
+    fi
+
+    if [ ! -d "${HOME}/.dotfiles" ]; then
+        mkdir -p ~/dev/github.com/mykiwi
+        git clone --recursive git@github.com:mykiwi/dotfiles.git ~/dev/github.com/mykiwi/dotfiles
+        sh -c 'cd ~/dev/github.com/mykiwi/dotfiles && install.sh'
+        git clone --recursive git@github.com:mykiwi/dotfiles.private.git ~/dev/github.com/mykiwi/dotfiles.private
+        sh -c 'cd ~/dev/github.com/mykiwi/dotfiles.private/ && install.sh'
+    fi
+
+    if [ ${SHELL} != "/usr/bin/zsh" ]; then
+        chsh -s /usr/bin/zsh
+    fi
 fi
