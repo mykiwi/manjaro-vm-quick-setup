@@ -9,11 +9,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: initialize manjaro
-      run: |
-        chmod 777 setup.sh
-        cd .github/workflows
-        docker build -t manjaro .
     - name: ./setup.sh
-      run: docker run --rm --volume=`pwd`:/home/mykiwi manjaro bash -c 'pwd; ls -la; ./setup.sh'
+      run: docker run --rm --volume=`pwd`:/home/mykiwi mykiwi/manjaro bash -c 'pwd; ls -la; ./setup.sh'
       
