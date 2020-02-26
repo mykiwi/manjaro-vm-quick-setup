@@ -126,6 +126,7 @@ EOF
     yes $PASSWORD | pamac install --no-confirm \
         nodejs \
         npm \
+        yarn \
         php \
         php-apcu \
         php-gd \
