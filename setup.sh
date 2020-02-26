@@ -113,6 +113,7 @@ EOF
 
     yes $PASSWORD | pamac build --no-confirm \
         brave-bin \
+        github-cli \
         jetbrains-toolbox \
         keybase-bin \
         sublime-text-dev \
