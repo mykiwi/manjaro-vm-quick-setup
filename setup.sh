@@ -142,12 +142,18 @@ EOF
         php-blackfire
 
     if [ ! -f "/usr/local/bin/composer" ]; then
-        yes $PASSWORD | curl -sSL -o /usr/local/bin/composer https://getcomposer.org/composer-stable.phar
-        yes $PASSWORD | chmod +x /usr/local/bin/composer
+        curl -sSL -o composer https://getcomposer.org/composer-stable.phar
+        chmod +x composer
+        yes $PASSWORD | sudo mv composer /usr/local/bin/
     fi
     if [ ! -f "/usr/local/bin/symfony" ]; then
         wget https://get.symfony.com/cli/installer -O - | bash
         yes $PASSWORD | ln -s /home/mykiwi/.symfony/bin/symfony /usr/local/bin/symfony
+    fi
+    if [ ! -f "/usr/local/bin/melody" ]; then
+        curl -sSL -o melody http://get.sensiolabs.org/melody.phar
+        chmod +x melody
+        yes $PASSWORD | sudo mv melody /usr/local/bin/
     fi
 fi
 
